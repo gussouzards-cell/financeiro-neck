@@ -1,6 +1,17 @@
 import { useState } from 'react'
 import { exportToCSV, exportToPDF, exportToExcel } from '../utils/exportUtils'
 
+interface Relatorio {
+  id: string
+  aluno: string
+  responsavel: string
+  valor: number
+  vencimento: string
+  pagamento: string
+  status: string
+  tipo: string
+}
+
 export default function Relatorios() {
   const [periodo, setPeriodo] = useState('mes')
   const [turma, setTurma] = useState('todas')
@@ -13,7 +24,7 @@ export default function Relatorios() {
   const responsaveis = JSON.parse(localStorage.getItem('responsaveis') || '[]')
 
   // Gerar relatórios combinando cobranças e pagamentos
-  const relatorios = cobrancas.map((cobranca: any) => {
+  const relatorios: Relatorio[] = cobrancas.map((cobranca: any) => {
     const responsavel = responsaveis.find((r: any) => r.id === cobranca.responsavelId)
     const aluno = alunos.find((a: any) => a.responsavelId === cobranca.responsavelId)
     const pagamento = pagamentos.find((p: any) => p.cobrancaId === cobranca.id)
@@ -42,7 +53,7 @@ export default function Relatorios() {
   })
 
   const handleExportCSV = () => {
-    const dadosExportacao = relatorios.map((r) => ({
+    const dadosExportacao = relatorios.map((r: Relatorio) => ({
       Aluno: r.aluno,
       Responsável: r.responsavel,
       Valor: `R$ ${r.valor.toFixed(2).replace('.', ',')}`,
@@ -55,7 +66,7 @@ export default function Relatorios() {
   }
 
   const handleExportPDF = () => {
-    const dadosExportacao = relatorios.map((r) => ({
+    const dadosExportacao = relatorios.map((r: Relatorio) => ({
       Aluno: r.aluno,
       Responsável: r.responsavel,
       Valor: `R$ ${r.valor.toFixed(2).replace('.', ',')}`,
@@ -72,7 +83,7 @@ export default function Relatorios() {
   }
 
   const handleExportExcel = () => {
-    const dadosExportacao = relatorios.map((r) => ({
+    const dadosExportacao = relatorios.map((r: Relatorio) => ({
       Aluno: r.aluno,
       Responsável: r.responsavel,
       Valor: r.valor,
@@ -163,7 +174,7 @@ export default function Relatorios() {
               </tr>
             </thead>
             <tbody>
-              {relatorios.map((relatorio) => (
+              {relatorios.map((relatorio: Relatorio) => (
                 <tr
                   key={relatorio.id}
                   className="border-b border-gray-medium hover:bg-gray-light transition-colors"
