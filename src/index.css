@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-black font-sans;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white border border-gray-medium rounded-card p-6;
+  }
+  
+  .btn-primary {
+    @apply bg-black text-white px-6 py-3 rounded-card font-medium hover:opacity-90 transition-opacity;
+  }
+  
+  .btn-outline {
+    @apply border border-black text-black px-6 py-3 rounded-card font-medium hover:bg-gray-light transition-colors;
+  }
+  
+  .input-field {
+    @apply w-full border border-gray-medium rounded-card px-4 py-3 text-black placeholder-gray-dark focus:outline-none focus:border-black transition-colors;
+  }
+  
+  .pill-button {
+    @apply px-4 py-2 rounded-full border border-gray-medium text-gray-dark font-medium hover:border-black hover:text-black transition-colors;
+  }
+  
+  .pill-button-active {
+    @apply px-4 py-2 rounded-full border border-black bg-black text-white font-medium;
+  }
+}
+
+
+
+
+
+
